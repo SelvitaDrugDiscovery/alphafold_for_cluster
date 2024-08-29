@@ -22,8 +22,8 @@ from typing import Tuple
 from absl import app
 from absl import flags
 from absl import logging
-import docker
-from docker import types
+# import docker
+# from docker import types
 
 
 flags.DEFINE_bool(
@@ -229,33 +229,34 @@ def main(argv):
       '--logtostderr',
   ])
 
-  client = docker.from_env()
-  device_requests = [
-      docker.types.DeviceRequest(driver='nvidia', capabilities=[['gpu']])
-  ] if FLAGS.use_gpu else None
-
-  container = client.containers.run(
-      image=FLAGS.docker_image_name,
-      command=command_args,
-      device_requests=device_requests,
-      remove=True,
-      detach=True,
-      mounts=mounts,
-      user=FLAGS.docker_user,
-      environment={
-          'NVIDIA_VISIBLE_DEVICES': FLAGS.gpu_devices,
-          # The following flags allow us to make predictions on proteins that
-          # would typically be too long to fit into GPU memory.
-          'TF_FORCE_UNIFIED_MEMORY': '1',
-          'XLA_PYTHON_CLIENT_MEM_FRACTION': '4.0',
-      })
-
+  # client = docker.from_env()
+  # device_requests = [
+  #     docker.types.DeviceRequest(driver='nvidia', capabilities=[['gpu']])
+  # ] if FLAGS.use_gpu else None
+  # container = client.containers.run(
+  #     image=FLAGS.docker_image_name,
+  #     command=command_args,
+  #     device_requests=device_requests,
+  #     remove=True,
+  #     detach=True,
+  #     mounts=mounts,
+  #     user=FLAGS.docker_user,
+  #     environment={
+  #         'NVIDIA_VISIBLE_DEVICES': FLAGS.gpu_devices,
+  #         # The following flags allow us to make predictions on proteins that
+  #         # would typically be too long to fit into GPU memory.
+  #         'TF_FORCE_UNIFIED_MEMORY': '1',
+  #         'XLA_PYTHON_CLIENT_MEM_FRACTION': '4.0',
+  #     })
+  #
   # Add signal handler to ensure CTRL+C also stops the running container.
-  signal.signal(signal.SIGINT,
-                lambda unused_sig, unused_frame: container.kill())
+  # signal.signal(signal.SIGINT,
+  #               lambda unused_sig, unused_frame: container.kill())
+  #
+  # for line in container.logs(stream=True):
+  #   logging.info(line.strip().decode('utf-8'))
 
-  for line in container.logs(stream=True):
-    logging.info(line.strip().decode('utf-8'))
+  os.system(f"python /app/alphafold/run_alphafold.py {' '.join(command_args)}")
 
 
 if __name__ == '__main__':

@@ -99,26 +99,6 @@ FLAGS = flags.FLAGS
 _ROOT_MOUNT_DIRECTORY = '/mnt/'
 
 
-def _create_mount(mount_name: str, path: str) -> Tuple[types.Mount, str]:
-  """Create a mount point for each file and directory used by the model."""
-  path = pathlib.Path(path).absolute()
-  target_path = pathlib.Path(_ROOT_MOUNT_DIRECTORY, mount_name)
-
-  if path.is_dir():
-    source_path = path
-    mounted_path = target_path
-  else:
-    source_path = path.parent
-    mounted_path = pathlib.Path(target_path, path.name)
-  if not source_path.exists():
-    raise ValueError(f'Failed to find source directory "{source_path}" to '
-                     'mount in Docker container.')
-  logging.info('Mounting %s -> %s', source_path, target_path)
-  mount = types.Mount(target=str(target_path), source=str(source_path),
-                      type='bind', read_only=True)
-  return mount, str(mounted_path)
-
-
 def main(argv):
   if len(argv) > 1:
     raise app.UsageError('Too many command-line arguments.')
@@ -176,12 +156,12 @@ def main(argv):
   command_args = []
 
   # Mount each fasta path as a unique target directory.
-  target_fasta_paths = []
-  for i, fasta_path in enumerate(FLAGS.fasta_paths):
-    mount, target_path = _create_mount(f'fasta_path_{i}', fasta_path)
-    mounts.append(mount)
-    target_fasta_paths.append(target_path)
-  command_args.append(f'--fasta_paths={",".join(target_fasta_paths)}')
+  # target_fasta_paths = []
+  # for i, fasta_path in enumerate(FLAGS.fasta_paths):
+  #   # mount, target_path = _create_mount(f'fasta_path_{i}', fasta_path)
+  #   # mounts.append(mount)
+  #   target_fasta_paths.append(fasta_path)
+  command_args.append(f'--fasta_paths={",".join(FLAGS.fasta_paths)}')
 
   database_paths = [
       ('uniref90_database_path', uniref90_database_path),
@@ -207,12 +187,12 @@ def main(argv):
     ])
   for name, path in database_paths:
     if path:
-      mount, target_path = _create_mount(name, path)
-      mounts.append(mount)
-      command_args.append(f'--{name}={target_path}')
+      # mount, target_path = _create_mount(name, path)
+      # mounts.append(mount)
+      command_args.append(f'--{name}={path}')
 
   output_target_path = os.path.join(_ROOT_MOUNT_DIRECTORY, 'output')
-  mounts.append(types.Mount(output_target_path, FLAGS.output_dir, type='bind'))
+  # mounts.append(types.Mount(output_target_path, FLAGS.output_dir, type='bind'))
 
   use_gpu_relax = FLAGS.enable_gpu_relax and FLAGS.use_gpu
 
@@ -265,6 +245,7 @@ def main(argv):
     f.write("\n\n\n")
     f.write("Flags: \n", FLAGS)
     f.write("\n\n\n")
+
   os.system(command)
 
 

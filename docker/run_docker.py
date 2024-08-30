@@ -237,13 +237,13 @@ def main(argv):
   #   logging.info(line.strip().decode('utf-8'))
   command = f"python /app/alphafold/run_alphafold.py {' '.join(command_args)}"
   with open("/homes/fabrizio.ambrogi/cluster_result/logs_from_execution.log", "w+") as f:
-    f.write("Command: \n", command)
+    f.write("Command: \n" + command)
     f.write("\n\n\n")
-    f.write("Comand args: \n", command_args)
+    f.write("Comand args: \n" + command_args)
     f.write("\n\n\n")
-    f.write("database_paths: \n", database_paths)
+    f.write("database_paths: \n" + database_paths)
     f.write("\n\n\n")
-    f.write("Flags: \n", FLAGS)
+    f.write("Flags: \n" + str(FLAGS))
     f.write("\n\n\n")
 
   os.system(command)

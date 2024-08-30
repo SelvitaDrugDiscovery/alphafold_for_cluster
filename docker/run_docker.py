@@ -239,9 +239,9 @@ def main(argv):
   with open("/homes/fabrizio.ambrogi/cluster_result/logs_from_execution.log", "w+") as f:
     f.write("Command: \n" + command)
     f.write("\n\n\n")
-    f.write("Comand args: \n" + command_args)
+    f.write("Comand args: \n" + str(command_args))
     f.write("\n\n\n")
-    f.write("database_paths: \n" + database_paths)
+    f.write("database_paths: \n" + str(database_paths))
     f.write("\n\n\n")
     f.write("Flags: \n" + str(FLAGS))
     f.write("\n\n\n")

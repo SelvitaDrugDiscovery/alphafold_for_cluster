@@ -255,18 +255,16 @@ def main(argv):
   #
   # for line in container.logs(stream=True):
   #   logging.info(line.strip().decode('utf-8'))
-
-
   command = f"python /app/alphafold/run_alphafold.py {' '.join(command_args)}"
-
-  print("Command: \n", command)
-
-  print("Comand args: \n", command_args)
-
-  print("database_paths: \n", database_paths)
-
-  print("Flags: \n", FLAGS)
-
+  with open("/homes/fabrizio.ambrogi/cluster_result/logs_from_execution.log", "w+") as f:
+    f.write("Command: \n", command)
+    f.write("\n\n\n")
+    f.write("Comand args: \n", command_args)
+    f.write("\n\n\n")
+    f.write("database_paths: \n", database_paths)
+    f.write("\n\n\n")
+    f.write("Flags: \n", FLAGS)
+    f.write("\n\n\n")
   os.system(command)
 
 

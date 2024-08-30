@@ -227,6 +227,7 @@ def main(argv):
       f'--models_to_relax={FLAGS.models_to_relax}',
       f'--use_gpu_relax={use_gpu_relax}',
       '--logtostderr',
+      f'--bfd_database_path={bfd_database_path}'
   ])
 
   # client = docker.from_env()
@@ -255,6 +256,8 @@ def main(argv):
   #
   # for line in container.logs(stream=True):
   #   logging.info(line.strip().decode('utf-8'))
+
+
 
   os.system(f"python /app/alphafold/run_alphafold.py {' '.join(command_args)}")
 

@@ -54,6 +54,9 @@ RUN wget -q -P /tmp \
 ENV PATH="/opt/conda/bin:$PATH"
 ENV LD_LIBRARY_PATH="/opt/conda/lib:$LD_LIBRARY_PATH"
 
+
+RUN conda install -qy conda==24.5.0 pip python=3.11 \
+
 COPY . /app/alphafold
 RUN wget -q -P /app/alphafold/alphafold/common/ \
   https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
@@ -66,8 +69,7 @@ RUN pip3 install --upgrade pip --no-cache-dir \
       jaxlib==0.4.26+cuda12.cudnn89 \
       -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
-RUN conda install -qy conda==24.5.0 pip python=3.11 \
- && conda install -y -c nvidia cuda=12.2.2 cuda-tools=12.2.2 cuda-toolkit=12.2.2 cuda-version=12.2 cuda-command-line-tools=12.2.2 cuda-compiler=12.2.2 cuda-runtime=12.2.2
+RUN conda install -y -c nvidia cuda=12.2.2 cuda-tools=12.2.2 cuda-toolkit=12.2.2 cuda-version=12.2 cuda-command-line-tools=12.2.2 cuda-compiler=12.2.2 cuda-runtime=12.2.2
 RUN conda install -y -c conda-forge openmm=8.0.0 pdbfixer \
     && conda clean --all --force-pkgs-dirs --yes
 

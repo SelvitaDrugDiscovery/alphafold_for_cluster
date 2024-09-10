@@ -67,8 +67,8 @@ RUN wget -q -P /app/alphafold/alphafold/common/ \
 RUN pip3 install --upgrade pip --no-cache-dir \
     && pip3 install -r /app/alphafold/requirements.txt --no-cache-dir \
     && pip3 install --upgrade --no-cache-dir \
-      jax==0.4.26 \
-      jaxlib==0.4.26+cuda12.cudnn89 \
+      jax==0.4.17 \
+      jaxlib==0.4.17+cuda12.cudnn89 \
       -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
 # Add SETUID bit to the ldconfig binary so that non-root users can run it.

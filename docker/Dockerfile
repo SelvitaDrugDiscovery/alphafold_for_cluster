@@ -67,7 +67,7 @@ RUN pip3 install --upgrade pip --no-cache-dir \
     && pip3 install -r /app/alphafold/requirements.txt --no-cache-dir \
     && pip3 install --upgrade --no-cache-dir \
       jax==0.4.26 \
-      jaxlib==0.4.26+cuda12.cudnn89 \
+      jaxlib==0.4.26+cuda12.cudnn88 \
       -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
 RUN conda install -y -c nvidia cuda=12.2.2 cuda-tools=12.2.2 cuda-toolkit=12.2.2 cuda-version=12.2 cuda-command-line-tools=12.2.2 cuda-compiler=12.2.2 cuda-runtime=12.2.2

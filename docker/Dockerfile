@@ -66,7 +66,7 @@ RUN wget -q -P /app/alphafold/alphafold/common/ \
 RUN pip3 install --upgrade pip --no-cache-dir \
     && pip3 install -r /app/alphafold/requirements.txt --no-cache-dir \
     && pip3 install --upgrade --no-cache-dir
-RUN pip3 install jax[cuda12_pip]
+RUN pip3 install jax[cuda12_pip] \
       -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
 

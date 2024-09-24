@@ -58,7 +58,7 @@ RUN conda install -qy conda==24.5.0 pip python=3.11 \
  && conda install -y -c nvidia cuda=12.2.2 cuda-tools=12.2.2 cuda-toolkit=12.2.2 cuda-version=12.2 cuda-command-line-tools=12.2.2 cuda-compiler=12.2.2 cuda-runtime=12.2.2
 RUN conda install -y -c conda-forge openmm=8.0.0 pdbfixer \
     && conda clean --all --force-pkgs-dirs --yes
-
+RUN conda install nvidia/label/cuda-12.3.2::cuda-nvcc
 
 COPY . /app/alphafold
 RUN wget -q -P /app/alphafold/alphafold/common/ \

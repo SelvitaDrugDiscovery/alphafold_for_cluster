@@ -51,13 +51,13 @@ RUN wget -q -P /tmp \
     && bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -p /opt/conda \
     && rm /tmp/Miniconda3-latest-Linux-x86_64.sh
 
-RUN conda install nvidia/label/cuda-12.3.2::cuda-nvcc
 
 
 # Install conda packages.
 ENV PATH="/opt/conda/bin:$PATH"
 ENV LD_LIBRARY_PATH="/opt/conda/lib:$LD_LIBRARY_PATH"
 RUN conda install -qy conda==24.5.0 pip python=3.11 \
+ && conda install nvidia/label/cuda-12.2.2::cuda-nvcc \
  && conda install -y -c nvidia cuda=12.2.2 cuda-tools=12.2.2 cuda-toolkit=12.2.2 cuda-version=12.2 cuda-command-line-tools=12.2.2 cuda-compiler=12.2.2 cuda-runtime=12.2.2
 RUN conda install -y -c conda-forge openmm=8.0.0 pdbfixer \
     && conda clean --all --force-pkgs-dirs --yes

@@ -79,9 +79,9 @@ RUN pip3 install --upgrade pip --no-cache-dir \
 #      jaxlib==0.4.26+cuda12.cudnn89 \
 
 
-RUN conda install nvidia/label/cuda-12.3.2::cuda-nvcc
-
-RUN conda install -y -c nvidia cuda=12.3.2 cuda-tools=12.3.2 cuda-toolkit=12.3.2 cuda-version=12.3 cuda-command-line-tools=12.3.2 cuda-compiler=12.3.2 cuda-runtime=12.3.2
+#RUN conda install nvidia/label/cuda-12.3.2::cuda-nvcc
+#
+#RUN conda install -y -c nvidia cuda=12.3.2 cuda-tools=12.3.2 cuda-toolkit=12.3.2 cuda-version=12.3 cuda-command-line-tools=12.3.2 cuda-compiler=12.3.2 cuda-runtime=12.3.2
 
 RUN conda install -y -c conda-forge openmm=8.0.0 pdbfixer \
     && conda clean --all --force-pkgs-dirs --yes

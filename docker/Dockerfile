@@ -65,10 +65,13 @@ RUN wget -q -P /app/alphafold/alphafold/common/ \
 # Install pip packages.
 RUN pip3 install --upgrade pip --no-cache-dir \
     && pip3 install -r /app/alphafold/requirements.txt --no-cache-dir
+
+
+
 #RUN pip3 install jax==0.4.26 jaxlib==0.4.26+cuda12.cudnn89\
 #      -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
-RUN conda install jax[cuda12_cudnn89] -c conda-forge
+#RUN conda install jax[cuda12_cudnn89] -c conda-forge
 
 
 ########## No nvcc installed above

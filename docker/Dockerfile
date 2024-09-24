@@ -11,8 +11,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-ARG CUDA=12.2.2
-FROM nvidia/cuda:12.2.2-cudnn8-runtime-ubuntu20.04
+ARG CUDA=12.3.2
+FROM nvidia/cuda:12.3.2-cudnn8-runtime-ubuntu20.04
 # FROM directive resets ARGS, so we specify again (the value is retained if
 # previously set).
 ARG CUDA
@@ -79,9 +79,9 @@ RUN pip3 install --upgrade pip --no-cache-dir \
 #      jaxlib==0.4.26+cuda12.cudnn89 \
 
 
-RUN conda install nvidia/label/cuda-12.2.2::cuda-nvcc
+RUN conda install nvidia/label/cuda-12.3.2::cuda-nvcc
 
-RUN conda install -y -c nvidia cuda=12.2.2 cuda-tools=12.2.2 cuda-toolkit=12.2.2 cuda-version=12.2 cuda-command-line-tools=12.2.2 cuda-compiler=12.2.2 cuda-runtime=12.2.2
+RUN conda install -y -c nvidia cuda=12.3.2 cuda-tools=12.3.2 cuda-toolkit=12.3.2 cuda-version=12.3 cuda-command-line-tools=12.3.2 cuda-compiler=12.3.2 cuda-runtime=12.3.2
 
 RUN conda install -y -c conda-forge openmm=8.0.0 pdbfixer \
     && conda clean --all --force-pkgs-dirs --yes

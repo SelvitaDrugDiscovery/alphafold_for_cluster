@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 ARG CUDA=12.3.2
-FROM nvcr.io/nvidia/jax:24.04-py3
+FROM nvidia/cuda:12.3.2-cudnn9-devel-ubuntu20.04
 # FROM directive resets ARGS, so we specify again (the value is retained if
 # previously set).
 ARG CUDA
@@ -24,7 +24,6 @@ RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y \
         build-essential \
         cmake \
-        cuda-command-line-tools-$(cut -f1,2 -d- <<< ${CUDA//./-}) \
         git \
         hmmer \
         kalign \

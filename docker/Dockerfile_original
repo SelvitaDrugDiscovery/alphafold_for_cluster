@@ -13,7 +13,7 @@
 # limitations under the License.
 
 ARG CUDA=12.2.2
-FROM nvidia/cuda:${CUDA}-cudnn8-runtime-ubuntu20.04
+FROM nvcr.io/nvidia/jax:24.04-py3
 # FROM directive resets ARGS, so we specify again (the value is retained if
 # previously set).
 ARG CUDA
@@ -68,7 +68,7 @@ RUN wget -q -P /app/alphafold/alphafold/common/ \
 
 # Install pip packages.
 RUN pip3 install --upgrade pip --no-cache-dir \
-    && pip3 install -r /app/alphafold/requirements.txt --no-cache-dir \
+    && pip3 install -r /app/alphafold/refquirements.txt --no-cache-dir \
     && pip3 install --upgrade --no-cache-dir \
       jax==0.4.26 \
       jaxlib==0.4.26+cuda12.cudnn89 \
